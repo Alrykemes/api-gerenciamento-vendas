@@ -5,11 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-@Table(name = "Products", schema = "Sales-Manager")
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="product_id",unique = true)
+    @Column(name ="product_id",unique = true, insertable = false, updatable = false)
     private Integer id;
     @Column(length = 30, nullable = false)
     private String name;

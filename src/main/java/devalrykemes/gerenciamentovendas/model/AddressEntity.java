@@ -8,11 +8,11 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-@Table(name = "Address", schema = "Sales-Manager")
+@Table(name = "Address")
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", unique = true)
+    @Column(name = "address_id", unique = true, insertable = false, updatable = false)
     private Integer id;
     @Column(nullable = false)
     private String cidade;
