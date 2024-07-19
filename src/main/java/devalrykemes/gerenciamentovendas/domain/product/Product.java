@@ -1,4 +1,4 @@
-package devalrykemes.gerenciamentovendas.model;
+package devalrykemes.gerenciamentovendas.domain.product;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,5 +18,10 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    public Product(ProductRequestDto productData) {
+        this.name = productData.name();
+        this.description = productData.description();
+        this.price = productData.price();
+    }
 
 }

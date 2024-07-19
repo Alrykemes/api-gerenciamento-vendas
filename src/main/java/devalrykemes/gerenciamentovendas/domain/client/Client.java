@@ -1,8 +1,6 @@
-package devalrykemes.gerenciamentovendas.model;
+package devalrykemes.gerenciamentovendas.domain.client;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
@@ -14,9 +12,8 @@ public class Client {
     private Integer id;
     @Column(length = 30, nullable = false)
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false)
-    private AddressEntity adress;
 
-
+    public Client(ClientRequestDto clientData) {
+        this.name = clientData.name();
+    }
 }
