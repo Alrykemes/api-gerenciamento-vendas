@@ -25,7 +25,7 @@ public class ClientController {
 
     @PutMapping("/{clientId}")
     public ResponseEntity<ClientDetailsDto> updateClient(@PathVariable Integer clientId, @RequestBody ClientRequestDto clientData) {
-        ClientDetailsDto clientUpdated = clientService.updateClient(clientId, clientData);
+        ClientDetailsDto clientUpdated = this.clientService.updateClient(clientId, clientData);
         if(Objects.nonNull(clientUpdated)) {
             return ResponseEntity.ok(clientUpdated);
         }
@@ -46,7 +46,7 @@ public class ClientController {
 
     @DeleteMapping("/{clientId}")
     public ResponseEntity deleteClient(@PathVariable Integer clientId) {
-        clientService.deleteClient(clientId);
+        this.clientService.deleteClient(clientId);
         return ResponseEntity.ok("Cliente com o ID: " + clientId + "deletado com sucesso!.");
     }
 

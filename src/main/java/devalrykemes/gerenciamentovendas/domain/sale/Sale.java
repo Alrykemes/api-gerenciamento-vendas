@@ -1,5 +1,7 @@
 package devalrykemes.gerenciamentovendas.domain.sale;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import devalrykemes.gerenciamentovendas.domain.client.Client;
 import devalrykemes.gerenciamentovendas.domain.product.Product;
 import jakarta.persistence.*;
@@ -9,11 +11,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-@Table(name = "sales")
+@Table(name = "sale")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,21 +25,15 @@ public class Sale {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
     @Column(nullable = false)
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "sales",
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sale_product",
             joinColumns = @JoinColumn(name = "sale_id"),
-            inverseJoinColumns = @JoinColumn(name = "products_id"))
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnoreProperties()
     private List<Product> products;
     @Column(nullable = false)
     private Date date;
     @Column(nullable = false)
     private BigDecimal price;
-
-    public Sale(SaleRequestDto saleData) {
-        this.client = saleData.client();
-        this.products = saleData.products();
-        this.date = saleData.date();
-        this.price = saleData.price();
-    }
 
 }

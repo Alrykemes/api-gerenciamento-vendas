@@ -21,18 +21,18 @@ public class ProductService {
         newProduct.setDescription(productData.description());
         newProduct.setPrice(productData.price());
 
-        productRepository.save(newProduct);
+        this.productRepository.save(newProduct);
 
         return newProduct;
     }
 
     public ProductResponseDto updateProduct(Integer id, ProductRequestDto productData) {
-        Optional<Product> product = productRepository.findById(id);
+        Optional<Product> product = this.productRepository.findById(id);
 
         product.get().setName(productData.name());
         product.get().setDescription(productData.description());
         product.get().setPrice(productData.price());
-        productRepository.save(product.get());
+        this.productRepository.save(product.get());
 
         return new ProductResponseDto(
                 product.get().getId(),
@@ -42,7 +42,7 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> findAll() {
-        return productRepository.findAll().stream().map(product -> new ProductResponseDto(
+        return this.productRepository.findAll().stream().map(product -> new ProductResponseDto(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
@@ -51,8 +51,8 @@ public class ProductService {
     }
 
     public ProductResponseDto getProductDetails(Integer id) {
-        Product product = productRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Product not found"));
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
         return new ProductResponseDto(
                 product.getId(),
@@ -65,6 +65,5 @@ public class ProductService {
     public void deleteProduct(Integer id) {
         this.productRepository.deleteById(id);
     }
-
 
 }

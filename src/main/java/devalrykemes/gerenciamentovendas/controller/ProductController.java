@@ -23,7 +23,7 @@ public class ProductController {
 
     @PutMapping("/{productID}")
     public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable("productID") Integer productID, @RequestBody ProductRequestDto productData) {
-        return ResponseEntity.ok(productService.updateProduct(productID, productData));
+        return ResponseEntity.ok(this.productService.updateProduct(productID, productData));
     }
 
     @GetMapping
@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Integer productId) {
-        return ResponseEntity.ok(productService.getProductDetails(productId));
+        return ResponseEntity.ok(this.productService.getProductDetails(productId));
     }
 
     @DeleteMapping("/{productID}")

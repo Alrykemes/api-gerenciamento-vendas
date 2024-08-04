@@ -18,14 +18,14 @@ public class AddressController {
 
     @GetMapping
     public ResponseEntity listAllAddress() {
-        List<AddressResponseDto> listAddress = repository.findAll().stream().map(AddressResponseDto::new).toList();
+        List<AddressResponseDto> listAddress = this.repository.findAll().stream().map(AddressResponseDto::new).toList();
         return ResponseEntity.ok(listAddress);
     }
 
     @PostMapping
     public ResponseEntity saveAddress(@RequestBody AddressRequestDto addressData) {
         Address address = new Address(addressData);
-        repository.save(address);
+        this.repository.save(address);
         return ResponseEntity.ok().build();
     }
 

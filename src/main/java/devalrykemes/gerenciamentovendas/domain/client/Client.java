@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-@Table(name = "clients")
+@Table(name = "client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,4 @@ public class Client {
     @Column(length = 30, nullable = false)
     private String name;
 
-    public Client(ClientRequestDto clientData) {
-        this.name = clientData.name();
-    }
 }

@@ -26,10 +26,10 @@ public class AddressService {
         address.setCep(data.cep());
         address.setClient(client);
 
-        return addressRepository.save(address);
+        return this.addressRepository.save(address);
     }
 
     public Optional<Address> findByClientId(Integer clientId) {
-        return addressRepository.findByClientId(clientId);
+        return this.addressRepository.findByClientId(clientId);
     }
 }

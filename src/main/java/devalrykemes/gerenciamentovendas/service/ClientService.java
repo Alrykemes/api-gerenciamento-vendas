@@ -25,7 +25,7 @@ public class ClientService {
         Client newClient = new Client();
         newClient.setName(clientData.name());
 
-        clientRepository.save(newClient);
+        this.clientRepository.save(newClient);
 
         this.addressService.createAddress(clientData, newClient);
 
@@ -33,8 +33,8 @@ public class ClientService {
     }
 
     public ClientDetailsDto updateClient(Integer id, ClientRequestDto data) {
-        Optional<Client> client = clientRepository.findById(id);
-        Optional<Address> address = addressService.findByClientId(id);
+        Optional<Client> client = this.clientRepository.findById(id);
+        Optional<Address> address = this.addressService.findByClientId(id);
 
         if(client.isPresent() && address.isPresent()) {
             client.get().setName(data.name());
@@ -45,7 +45,7 @@ public class ClientService {
             address.get().setCidade(data.cidade());
             address.get().setEstado(data.estado());
             address.get().setCep(data.cep());
-            clientRepository.save(client.get());
+            this.clientRepository.save(client.get());
 
             return new ClientDetailsDto(
                     client.get().getId(),
@@ -63,10 +63,10 @@ public class ClientService {
     }
 
     public ClientDetailsDto getClientDetails(Integer clientId) {
-        Client client = clientRepository.findById(clientId)
+        Client client = this.clientRepository.findById(clientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found"));
 
-        Optional<Address> address = addressService.findByClientId(clientId);
+        Optional<Address> address = this.addressService.findByClientId(clientId);
 
         return new ClientDetailsDto(
                 client.getId(),
